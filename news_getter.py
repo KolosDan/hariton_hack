@@ -70,4 +70,6 @@ json.dump(final_corpus, open('corpus.json'))
 #         'bias_range': None,
 #         'cluster_metrics': None
 #     })
+#
+# client.close()
 
