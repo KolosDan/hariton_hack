@@ -55,10 +55,9 @@ if 'corpus.json' not in glob('*.json'):
 
     final_corpus = big_clean(news_corpus)
 
-    json.dump(final_corpus, open('corpus.json'))
+final_corpus = news_corpus
 
-# processing
-client = MongoClient()
+json.dump(final_corpus, open('corpus.json', 'w'))
 
 db = client.bipolarity
 
