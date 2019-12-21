@@ -66,7 +66,7 @@ def get_top_articles(url):
 
     return [i for i in redirected_link_blocks if i != []]
 
-def get_mirror(link):
+def get_mirror(url):
     soup = BeautifulSoup(requests.get(url).text, 'lxml')
     block = [i.get('href') for i in soup.find_all('a') if i.get('href') != None and './articles' in i.get('href')]
 

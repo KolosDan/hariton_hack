@@ -28,4 +28,4 @@ for block in clean_en_news:
     }
     news_corpus.append(sample)
 
-json.dump(news_corpus, open('dump.json', 'w'))
+json.dump(big_clean(news_corpus), open('dump.json', 'w'))
