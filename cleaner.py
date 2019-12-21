@@ -103,9 +103,11 @@ def big_clean(corpus):
     cleaned = []
 
     for group in out:
-        temp = []
+        temp = {'ru': [],
+                'en': []}
         for i in group:
-            temp.extend(corpus[i])
+            temp['ru'].extend(corpus[i]['ru'])
+            temp['en'].extend(corpus[i]['en'])
         cleaned.append(temp)
 
     for index, block in enumerate(corpus):

@@ -42,16 +42,19 @@ def get_bias(text, lang):
         return 2 * result -1
 
 # cluster functions
-def top_title(cluster):
+def get_pravda(cluster_id):
     return
 
-def range_sentiment(cluster):
+def range_sentiment(cluster_id):
     return
 
-def range_meaningfulness(cluster):
+def range_meaningfulness(cluster_id):
     return
 
-def cluster_metrics(cluster):
+def range_bias(cluster_id):
+    return
+
+def cluster_metrics(cluster_id):
     return {
         "date_range": publication_range,
         "ru_count": ru_count,
@@ -62,15 +65,10 @@ def cluster_metrics(cluster):
 # corpus functions
 
 def sentiment_top(corpus):
-    return {
-        "pos": pos_top,
-        "neg": neg_top,
-        "neu": neu_top
-    }
+    return {}
 
 def meaningfullness_top(corpus):
-    return {
-        "pos": pos_top,
-        "neg": neg_top,
-        "neu_top": neu_top
-    }
+    return {}
+
+def bias_top(corpus):
+    return {}

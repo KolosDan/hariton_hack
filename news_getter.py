@@ -4,6 +4,8 @@ from cleaner import clean, big_clean
 import json
 from multiprocessing import Pool
 from datetime import datetime
+from pymongo import MongoClient
+from bson import ObjectId
 
 ru_url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FuSjFHZ0pTVlNnQVAB?hl=ru&gl=RU&ceid=RU%3Aru'
 en_url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FuSjFHZ0pTVlNnQVAB?hl=en-US&gl=US&ceid=US:en'
@@ -45,4 +47,27 @@ for i in range(len(ru_mirror_results)):
 print('%s [INFO] FINISHED EN->RU MIRRORING' % str(datetime.now()))
 
 print('%s [INFO] STARTED BIG CLEAN' % str(datetime.now()))
-json.dump(big_clean(news_corpus), open('dump.json', 'w'))
+
+final_corpus = big_clean(news_corpus)
+
+json.dump(final_corpus, open('corpus.json'))
+
+# client = MongoClient()
+
+# db = client.bipolarity
+
+# for cluster in final_corpus:
+#     item_ids = []
+#     for lang in cluster:
+#         for article in cluster[lang]:
+#             item_ids.append(db.articles.insert_one({'article': article, 'lang': lang, 'stats': None}).inserted_id)
+
+#     db.clusters.insert_one({
+#         'articles': item_ids,
+#         'pravda': None,
+#         'sentiment_range': None,
+#         'meaningfullness_range': None,
+#         'bias_range': None,
+#         'cluster_metrics': None
+#     })
+
