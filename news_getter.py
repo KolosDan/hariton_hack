@@ -48,9 +48,9 @@ print('%s [INFO] FINISHED EN->RU MIRRORING' % str(datetime.now()))
 
 print('%s [INFO] STARTED BIG CLEAN' % str(datetime.now()))
 
-final_corpus = big_clean(news_corpus)
+final_corpus = news_corpus
 
-json.dump(final_corpus, open('corpus.json'))
+json.dump(final_corpus, open('corpus.json', 'w'))
 
 # client = MongoClient()
 
