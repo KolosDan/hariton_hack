@@ -15,8 +15,7 @@ ru_url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0F
 
 # gets all links from the google news "stories" (full coverage / related news)
 def extract_story(link):
-    soup = BeautifulSoup(requests.get(link).text, 'lxml',
-                headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'})
+    soup = BeautifulSoup(requests.get(link, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'}).text, 'lxml')
     result = ['https://news.google.com' + i.get('href')[1:] for i in soup.find_all('a') if i.get('href') != None and './articles' in i.get('href')]
     return result
 
