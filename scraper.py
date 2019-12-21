@@ -28,7 +28,7 @@ def get_link_batch(batch):
                 'gurl':  i,
                 'title': art.title,
                 'text': art.text,
-                'pub_date': art.publish_date,
+                'pub_date': str(art.publish_date)
             }
             articles.append(art_dict)
         except Exception:
