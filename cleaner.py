@@ -73,8 +73,11 @@ def big_clean(corpus):
     to_merge = []
     for combo in combos:
         intersection = set(combo[0][1]) & set(combo[1][1])
-        if len(intersection) / len(combo[0][1]) > 0.2 or len(intersection) / len(combo[1][1]) > 0.2:
-            to_merge.append((combo[0][0], combo[1][0]))
+        try:
+            if len(intersection) / len(combo[0][1]) > 0.2 or len(intersection) / len(combo[1][1]) > 0.2:
+                to_merge.append((combo[0][0], combo[1][0]))
+        except:
+            pass
 
     out = []
 

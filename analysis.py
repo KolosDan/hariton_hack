@@ -35,7 +35,11 @@ def get_keywords(text):
 
 
 def get_bias(text, lang):
-    return
+    if lang == 'english':
+        return TextBlob(text).sentiment.subjectivity
+    elif lang == 'russian':
+        result = model.predict([text])[0]['neutral']
+        return 2 * result -1
 
 # cluster functions
 def top_title(cluster):
