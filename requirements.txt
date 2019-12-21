@@ -1,3 +1,8 @@
 requests
 bs4
 lxml
+nltk
+newspaper3k
+summa
+googletrans
+textblob

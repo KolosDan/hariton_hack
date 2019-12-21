@@ -1,11 +1,33 @@
+from textblob import TextBlob
+from dostoevsky.tokenization import RegexTokenizer
+from dostoevsky.models import FastTextSocialNetworkModel
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
+from nltk.tag import pos_tag
+from collections import Counter
+import string
 
+
+tokenizer = RegexTokenizer()
+lemmatizer = WordNetLemmatizer()
+model = FastTextSocialNetworkModel(tokenizer=tokenizer)
 
 # article functions
-def sentiment(text):
-    return
+def sentiment(text, lang):
+    if lang == 'english':
+        blob = TextBlob(text)
+        return blob.sentiment.polarity
+    elif lang == 'russian':
+        result = model.predict([text])[0]
+        return result['positive'] - result['negative']
 
-def meaningfullness(text):
-    return
+def meaningfullness(text, lang):
+    tokens = [lemmatizer.lemmatize(i) for i in word_tokenize(text.lower(), language=lang) if i not in string.punctuation and len(i) > 2 and i not in stopwords.words(lang)]
+    print(tokens)
+    c = Counter(tokens)
+    return len(c) / len(tokens)
+
 
 def get_keywords(text):
     return
