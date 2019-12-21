@@ -12,6 +12,8 @@ clean_en_news = clean(get_top_articles(en_url), 'english')
 
 news_corpus = []
 
+print('[INFO] STARTED MIRROR GATHERING')
+
 p = Pool(len(clean_ru_news))
 en_mirror_results = p.map(get_mirror, [get_en_query(block) for block in clean_ru_news])
 
