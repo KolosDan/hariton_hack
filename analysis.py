@@ -7,6 +7,7 @@ from nltk.corpus import stopwords
 from nltk.tag import pos_tag
 from collections import Counter
 import string
+from summa import keywords
 
 
 tokenizer = RegexTokenizer()
@@ -30,10 +31,10 @@ def meaningfullness(text, lang):
 
 
 def get_keywords(text):
-    return
+    return keywords.keywords(text)
 
 
-def get_bias(text):
+def get_bias(text, lang):
     return
 
 # cluster functions
