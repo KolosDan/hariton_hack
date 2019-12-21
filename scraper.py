@@ -4,15 +4,19 @@ from newspaper import Article
 from multiprocessing import Pool
 import time
 import warnings
+import os
 
 warnings.filterwarnings("ignore")
 
 en_url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen'
 ru_url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FuSjFHZ0pTVlNnQVAB?hl=ru&gl=RU&ceid=RU%3Aru'
 
+
+
 # gets all links from the google news "stories" (full coverage / related news)
 def extract_story(link):
-    soup = BeautifulSoup(requests.get(link).text, 'lxml')
+    soup = BeautifulSoup(requests.get(link).text, 'lxml',
+                headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'})
     result = ['https://news.google.com' + i.get('href')[1:] for i in soup.find_all('a') if i.get('href') != None and './articles' in i.get('href')]
     return result
 
@@ -20,7 +24,7 @@ def get_link_batch(batch):
     articles = []
     for i in enumerate(batch):
         try:
-            art = Article(requests.get(i, verify=False, timeout=3).url)
+            art = Article(requests.get(i, verify=False, timeout=3, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'}).url)
             art.download()
             art.parse()
             art_dict = {
@@ -39,7 +43,7 @@ def get_link_batch(batch):
 # gets news.google.com last 70 article blocks 
 def get_top_articles(url):
     print('[INFO] STARTED GOOGLE.NEWS SCRAPER')
-    soup = BeautifulSoup(requests.get(url).text, 'lxml')
+    soup = BeautifulSoup(requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'}).text, 'lxml')
     link_groups = []
     for article_block in soup.find_all('div', class_ = 'xrnccd'):
         link_groups.append(['https://news.google.com' + i.get('href')[1:] for i in article_block.find_all('a') if i.get('href') != None and ('./article' in i.get('href') or './stories' in i.get('href'))])
@@ -67,7 +71,7 @@ def get_top_articles(url):
     return [i for i in redirected_link_blocks if i != []]
 
 def get_mirror(url):
-    soup = BeautifulSoup(requests.get(url).text, 'lxml')
+    soup = BeautifulSoup(requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246'}).text, 'lxml')
     block = [i.get('href') for i in soup.find_all('a') if i.get('href') != None and './articles' in i.get('href')]
     print('GOT %s ARTICLES IN MIRROR' % (str(len(block))))
     
