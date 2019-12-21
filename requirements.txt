@@ -7,3 +7,4 @@ summa
 googletrans
 textblob
 pymongo
+dostoevsky

@@ -59,6 +59,7 @@ final_corpus = news_corpus
 
 json.dump(final_corpus, open('corpus.json', 'w'))
 
+client = MongoClient()
 db = client.bipolarity
 
 print('%s [INFO] STARTED CORPUS ANALYSIS' % str(datetime.now()))

@@ -48,8 +48,8 @@ def get_article_stats(article_obj):
     return {
         "sentiment": sentiment(article['text'], lang),
         "meaningfullness": meaningfullness(article['text'], lang),
-        "bias": get_bias(article["text"], lang)
-        "keywords": get_keywords(text)
+        "bias": get_bias(article["text"], lang),
+        "keywords": get_keywords(article['text'])
     }
 
 # cluster functions

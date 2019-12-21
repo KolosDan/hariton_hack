@@ -18,7 +18,7 @@ def extract_story(link):
 
 def get_link_batch(batch):
     articles = []
-    for index, i in enumerate(batch):
+    for i in enumerate(batch):
         try:
             art = Article(requests.get(i, verify=False, timeout=3).url)
             art.download()
@@ -31,8 +31,8 @@ def get_link_batch(batch):
                 'pub_date': str(art.publish_date)
             }
             articles.append(art_dict)
-        except Exception:
-            pass
+        except Exception as e:
+            print(e)
         time.sleep(1)
     return articles
 
@@ -69,7 +69,8 @@ def get_top_articles(url):
 def get_mirror(url):
     soup = BeautifulSoup(requests.get(url).text, 'lxml')
     block = [i.get('href') for i in soup.find_all('a') if i.get('href') != None and './articles' in i.get('href')]
-
+    print('GOT %s ARTICLES IN MIRROR' % (str(len(block))))
+    
     articles = get_link_batch(block)
 
     return articles
