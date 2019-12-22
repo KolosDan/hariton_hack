@@ -18,8 +18,8 @@ if 'corpus.json' not in glob('*.json'):
     print('%s [INFO] STARTED GATHERING NEWS CORPUS' % str(datetime.now()))
 
 
-    clean_ru_news = clean(get_top_articles(ru_url), 'russian')
-    clean_en_news = clean(get_top_articles(en_url), 'english')
+    clean_ru_news = clean(get_top_articles(ru_url), 'russian')[:10]
+    clean_en_news = clean(get_top_articles(en_url), 'english')[:10]
 
     news_corpus = []
 
