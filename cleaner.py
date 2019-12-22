@@ -22,7 +22,7 @@ def clean(news, lang):
     to_merge = []
     for combo in combos:
         intersection = set(combo[0][1]) & set(combo[1][1])
-        if len(intersection) / len(combo[0][1]) > 0.2 or len(intersection) / len(combo[1][1]) > 0.2:
+        if len(intersection) / len(combo[0][1]) > 0.4 or len(intersection) / len(combo[1][1]) > 0.4:
             to_merge.append((combo[0][0], combo[1][0]))
 
     out = []
@@ -74,7 +74,7 @@ def big_clean(corpus):
     for combo in combos:
         intersection = set(combo[0][1]) & set(combo[1][1])
         try:
-            if len(intersection) / len(combo[0][1]) > 0.2 or len(intersection) / len(combo[1][1]) > 0.2:
+            if len(intersection) / len(combo[0][1]) > 0.4 or len(intersection) / len(combo[1][1]) > 0.4:
                 to_merge.append((combo[0][0], combo[1][0]))
         except:
             pass

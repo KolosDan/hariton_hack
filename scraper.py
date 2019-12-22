@@ -23,7 +23,7 @@ def get_link_batch(batch):
     articles = []
     for i in batch:
         try:
-            art = Article(requests.get(i).url)
+            art = Article(requests.get(i, verify=False, timeout=3).url)
             art.download()
             art.parse()
             art_dict = {
@@ -34,9 +34,8 @@ def get_link_batch(batch):
                 'pub_date': str(art.publish_date)
             }
             articles.append(art_dict)
-        except Exception as e:
-            print(e)
-        time.sleep(1)
+        except Exception:
+            pass
     return articles
 
 # gets news.google.com last 70 article blocks 

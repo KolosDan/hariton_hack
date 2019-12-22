@@ -54,10 +54,10 @@ if 'corpus.json' not in glob('*.json'):
     print('%s [INFO] STARTED BIG CLEAN' % str(datetime.now()))
 
     final_corpus = big_clean(news_corpus)
+    json.dump(final_corpus, open('corpus.json', 'w'))
 
-final_corpus = news_corpus
-
-json.dump(final_corpus, open('corpus.json', 'w'))
+else:
+    final_corpus = json.load(open('corpus.json'))
 
 client = MongoClient()
 db = client.bipolarity
