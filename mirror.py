@@ -25,7 +25,7 @@ def get_en_query(cluster):
         try:
             query = gosl.translate(' '.join([i[0] for i in c.most_common(5)]), 'en')
         except:
-            return
+            query = input('Translator blocked: translate %s:\n>' % ' '.join([i[0] for i in c.most_common(5)]))
     url = 'https://news.google.com/search?q=%s&hl=en-US&gl=US&ceid=US:en' % query
     
     return url.replace(' ', '+')
@@ -43,7 +43,8 @@ def get_ru_query(cluster):
         try:
             query = gosl.translate(' '.join([i[0] for i in c.most_common(5)]), 'ru')
         except:
-            return
+            query = input('Translator blocked: translate %s:\n>' % ' '.join([i[0] for i in c.most_common(5)]))
+
 
     url = 'https://news.google.com/search?q=%s&hl=ru' % query
     return url.replace(' ', '+')
