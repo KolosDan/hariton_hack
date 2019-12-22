@@ -8,3 +8,4 @@ googletrans
 textblob
 pymongo
 dostoevsky
+flask
