@@ -4,7 +4,7 @@ lxml
 nltk
 newspaper3k
 summa
-googletrans
+goslate
 textblob
 pymongo
 dostoevsky
