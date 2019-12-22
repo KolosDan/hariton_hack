@@ -19,25 +19,55 @@
     </head>
     <body>
         <h1>Самые свежие новости</h1>
-
+        {% for cluster in clusters %}
         <div class="container">
+            <p>От: {{ cluster.metrics.date_range[0].split(' ')[0] }}</p>
             <div class="card" style="width: 100%;">
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">{{ cluster.ru_title }}</h5>
+                        <p class="card-text">{{ cluster.ru_preview }}</p>
                     </div>
                     <div class="col">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">{{ cluster.en_title }}</h5>
+                        <p class="card-text">{{ cluster.en_preview }}</p>
                     </div>
                 </div>
-                    <a href="/cluster/12345678" style="margin-top:20px;"class="btn btn-primary">Подробнее</a>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <p>Статей из рунета: {{ cluster.metrics.ru_count }} </p>
+                    </div>
+                    <div class="col">
+                        <p>Статей в мире: {{ cluster.metrics.en_count }} </p>
+                    </div>
+                </div>
             </div>
+            <div class="container">
+                <div class="row">
+                <div class="col">
+                    <p>
+                        {% for tag in cluster.tags.ru %}
+                            <span  class="badge badge-pill badge-light">{{ tag[0] }}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="col">
+                    <p>
+                        {% for tag in cluster.tags.en %}
+                            <span  class="badge badge-pill badge-light">{{ tag[0] }}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            </div>
+            <div style="text-align: center;">
+                    <a href="/cluster/{{ cluster.id }}?range=sentiment" style="margin-bottom:20px;"class="btn btn-primary"><b>Подробнее</b></a>
+                </div>
             </div>
         </div>
         <br>
-
+        {% endfor %}
     </body>
 </html>

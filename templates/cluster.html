@@ -24,103 +24,122 @@
         </style>
     </head>
     <body>
-        <a href="/feed" class="btn btn-primary" style="margin-top: 30px; margin-left:30px;">На главную</a>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <a href="/feed" class="btn btn-primary" style="margin-top: 30px; margin-left:30px;">На главную</a>
+                </div>
+                <div class="col">
+                    <a href="/cluster/{{ output._id }}?range=sentiment" class="btn btn-primary" style="margin-top: 30px; margin-left:30px;">Сентиментальность</a>
+                </div>
+                <div class="col">
+                    <a href="/cluster/{{ output._id }}?range=bias" class="btn btn-primary" style="margin-top: 30px; margin-left:30px;">Предвзятость</a>
+                </div>
+                <div class="col">
+                    <a href="/cluster/{{ output._id }}?range=meaningfullness" class="btn btn-primary" style="margin-top: 30px; margin-left:30px;">Информативность</a>
+                </div>
+            </div>
+        </div>
         <div class="title" style="text-align: center;">
             <h1>Новость</h1>
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h2>US</h2>
+                        <h2>World</h2>
                     </div>
                     <div class="col">
                         <h2>RU</h2>  
                     </div>
                 </div>
                 <div class="tops" style="margin-top: 20px;">
-                    <div class="row">
-                        <div class="col">
-                            <p>US Sentiment 1 <a class="btn btn-primary">Источник</a></p>
-                        </div>
-                        <div class="col">
-                            <p>RU Sentiment 1 <a class="btn btn-primary">Источник</a></p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
+                        {% for i in output.high_range[:3] %}
+                        <div class="row">
                             <div class="col">
-                                <p>US Sentiment 2 <a class="btn btn-primary">Источник</a></p>
+                                <div class="card" style="height: 12em; background-color: palegreen;">
+                                    <p class="card-title" style="margin-top:30px;">{{ i[1].title }}</p>
+                                    <div class="card-body">
+                                        <a class="card_link" href="{{ i[1].url }}" class="btn btn-primary"><b>Источник</b></a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col">
-                                <p>RU Sentiment 2 <a class="btn btn-primary">Источник</a></p>
+                            <div class="card" style="height: 12em; background-color: palegreen;">
+                                    <p class="card-title" style="margin-top:30px;">{{ i[0].title }}</p>
+                                    <div class="card-body">
+                                        <a class="card_link" href="{{ i[0].url }}" class="btn btn-primary"><b>Источник</b></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    <br>
-                    <div class="row">
-                            <div class="col">
-                                <p>US Sentiment 3 <a class="btn btn-primary">Источник</a></p>
-                            </div>
-                            <div class="col">
-                                <p>RU Sentiment 3 <a class="btn btn-primary">Источник</a></p>
-                            </div>
-                        </div>
-                    <br>
+                        <br>
+                    {% endfor %}
                     <div class="row">
                         <div class="col">            
-                            <div class="card" style="width: 100%;">
-                                <h2 style="margin-top: 15px;">PRAVDA</h2>
+                            <div class="card" style="width: 100%; background-color: gainsboro;  margin-bottom: 30px; margin-top: 30px;" >
+                                <h2 style="margin-top: 30px;">PRAVDA</h2>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <p class="card-text">{{ output.en_pravda.title }}</p>
+                                            <a href="{{ output.en_pravda.url }}" style="margin-top:20px;"class="btn btn-primary">Источник</a>
                                         </div>
                                         <div class="col">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <p class="card-text">{{ output.ru_pravda.title }}</p>
+                                            <a href="{{ output.ru_pravda.url }}" style="margin-top:20px;"class="btn btn-primary">Источник</a>
                                         </div>
                                     </div>
-                                        <a href="#" style="margin-top:20px;"class="btn btn-primary">Источник</a>
                                 </div>
                                 </div>
                             </div>
                     </div>
                     <div class="tops" style="margin-top: 20px;">
+                        {% for i in output.low_range[:3] %}
                             <div class="row">
                                 <div class="col">
-                                    <p>US Sentiment -3 <a class="btn btn-primary">Источник</a></p>
+                                    <div class="card" style="height: 12em; background-color: darksalmon;">
+                                        <p class="card-title" style="margin-top:30px;">{{ i[1].title }}</p>
+                                        <div class="card-body">
+                                            <a class="card_link" href="{{ i[1].url }}" class="btn btn-primary"><b>Источник</b></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col">
-                                    <p>RU Sentiment -3 <a class="btn btn-primary">Источник</a></p>
+                                <div class="card" style="height: 12em;  background-color: darksalmon">
+                                        <p class="card-title" style="margin-top:30px;">{{ i[0].title }}</p>
+                                        <div class="card-body">
+                                            <a class="card_link" href="{{ i[0].url }}" class="btn btn-primary"><b>Источник</b></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <br>
-                            <div class="row">
-                                    <div class="col">
-                                        <p>US Sentiment -2 <a class="btn btn-primary">Источник</a></p>
-                                    </div>
-                                    <div class="col">
-                                        <p>RU Sentiment -2 <a class="btn btn-primary">Источник</a></p>
-                                    </div>
-                                </div>
-                            <br>
-                            <div class="row">
-                                    <div class="col">
-                                        <p>US Sentiment -1 <a class="btn btn-primary">Источник</a></p>
-                                    </div>
-                                    <div class="col">
-                                        <p>RU Sentiment -1 <a class="btn btn-primary">Источник</a></p>
-                                    </div>
-                                </div>
-                            <br>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
             <h1>Интересно знать</h1>
-            <div style="text-align: left;">
-                <ul>
-                    <li>Публикаций на тему: 1337</li>
-                    <li>Из РУ-сегмента: 228</li>
-                    <li>Из EN-сегмента: 420</li>
-                </ul>
+            <div class="container" style="margin-bottom: 100px;">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <h5 class="card-title" style="font-weight: 800;">Публикаций на тему:</h5>
+                            <p>{{ output.ru_count + output.en_count }}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <h5 class="card-title" style="font-weight: 800;">Публикаций в RU:</h5>
+                            <p>{{ output.ru_count }}</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <h5 class="card-title" style="font-weight: 800;">Публикаций в мире:</h5>
+                            <p>{{ output.en_count }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </body>

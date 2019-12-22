@@ -19,7 +19,7 @@ for index, cluster in enumerate(final_corpus):
             item_ids.append(db.articles.insert_one({'article': article, 'lang': lang, 'stats': stats}).inserted_id)
 
     cluster_obj = list(db.articles.find({'_id': {'$in': item_ids}}))
-
+    print('FINISHED - GETTING CLUSTER STATS')
     db.clusters.insert_one({
         'articles': item_ids,
         'pravda': get_pravda(cluster_obj),

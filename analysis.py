@@ -17,28 +17,30 @@ model = FastTextSocialNetworkModel(tokenizer=tokenizer)
 # article functions
 # article_obj: {"article": article, "lang": lang}
 def sentiment(text, lang):
-    if lang == 'english':
+    if lang == 'en':
         blob = TextBlob(text)
         return blob.sentiment.polarity
-    elif lang == 'russian':
+    elif lang == 'ru':
         result = model.predict([text])[0]
         return result['positive'] - result['negative']
 
 def meaningfullness(text, lang):
     tokens = [lemmatizer.lemmatize(i) for i in word_tokenize(text.lower(), language=lang) if i not in string.punctuation and len(i) > 2 and i not in stopwords.words(lang)]
-    print(tokens)
     c = Counter(tokens)
-    return len(c) / len(tokens)
+    try:
+        return len(c) / len(tokens)
+    except:
+        return 0
 
 
 def get_keywords(text):
-    return keywords.keywords(text)
+    return [i for i in keywords.keywords(text).split('\n') if i != '' and i not in stopwords.words('ru') and i not in stopwords.words('en') and len(i) > 2]
 
 
 def get_bias(text, lang):
-    if lang == 'english':
+    if lang == 'en':
         return 1 - TextBlob(text).sentiment.subjectivity
-    elif lang == 'russian':
+    elif lang == 'ru':
         return model.predict([text])[0]['neutral']
 
 def get_article_stats(article_obj):
