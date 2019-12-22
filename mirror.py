@@ -3,10 +3,16 @@ import json
 from summa import keywords
 from collections import Counter
 from nltk.corpus import stopwords
-from googletrans import Translator
 from nltk.stem import WordNetLemmatizer
+import requests
+import time
 
-trans = Translator()
+def translate(text, lang):
+    try:
+        response = requests.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20191221T075558Z.44eb038ba8d8b45d.912f1c0533276f6b1e0b19fb777d96842da7befa&text=%s&lang=%s" % (text, lang)).json()['text'][0]
+        return response
+    except KeyError:
+        return ''
 
 lemmatizer = WordNetLemmatizer()
 
@@ -18,10 +24,7 @@ def get_en_query(cluster):
     c = Counter(kwrds)
     query = ''
     for i in c.most_common(5):
-        try:
-            query += trans.translate(i[0], src='ru', dest='en').text + '+'
-        except:
-            pass
+        query += translate(i[0], 'en') + '+'
     
     url = 'https://news.google.com/search?q=%s&hl=en-US&gl=US&ceid=US:en' % query
     
@@ -35,10 +38,7 @@ def get_ru_query(cluster):
     c = Counter(kwrds)
     query = ''
     for i in c.most_common(5):
-        try:
-            query += trans.translate(i[0], src='en', dest='ru').text + '+'
-        except:
-            pass
+        query += translate(i[0], 'ru') + '+'
     
     url = 'https://news.google.com/search?q=%s&hl=ru' % query
     
