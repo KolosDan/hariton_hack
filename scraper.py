@@ -23,7 +23,7 @@ def get_link_batch(batch):
     articles = []
     for i in batch:
         try:
-            art = Article(requests.get(i, verify=False, timeout=3).url)
+            art = Article(requests.get(i).url)
             art.download()
             art.parse()
             art_dict = {
