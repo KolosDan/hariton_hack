@@ -25,6 +25,7 @@ def get_en_query(cluster):
     query = ''
     for i in c.most_common(5):
         query += translate(i[0], 'en') + '+'
+        time.sleep(1)
     
     url = 'https://news.google.com/search?q=%s&hl=en-US&gl=US&ceid=US:en' % query
     
@@ -39,7 +40,7 @@ def get_ru_query(cluster):
     query = ''
     for i in c.most_common(5):
         query += translate(i[0], 'ru') + '+'
-    
+        time.sleep(1)
     url = 'https://news.google.com/search?q=%s&hl=ru' % query
     
     return url.replace(' ', '+')
