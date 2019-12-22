@@ -16,8 +16,8 @@ en_url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0F
 print('%s [INFO] STARTED GATHERING NEWS CORPUS' % str(datetime.now()))
 
 
-clean_ru_news = clean(get_top_articles(ru_url), 'russian')[:10]
-clean_en_news = clean(get_top_articles(en_url), 'english')[:10]
+clean_ru_news = clean(get_top_articles(ru_url), 'russian')[:20]
+clean_en_news = clean(get_top_articles(en_url), 'english')[:20]
 
 news_corpus = []
 
