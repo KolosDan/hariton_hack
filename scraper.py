@@ -70,7 +70,7 @@ def get_top_articles(url):
 
 def get_mirror(url):
     soup = BeautifulSoup(requests.get(url).text, 'lxml')
-    block = ['https://news.google.com/' + i.get('href')[1:] for i in soup.find_all('a') if i.get('href') != None and './articles' in i.get('href')]
+    block = ['https://news.google.com' + i.find('a').get('href')[1:] for i in soup.find_all('h3') if i.find('a').get('href') != None and './articles' in i.find('a').get('href')]
     block = list(set(block))
     print('GOT %s ARTICLES IN MIRROR' % (str(len(block))))
     

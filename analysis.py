@@ -58,7 +58,8 @@ def get_article_stats(article_obj):
 # meaningfull_ness -> 1
 # bias -> 1
 def get_pravda(cluster_obj):
-    return max(cluster_obj, key=lambda x: x['stats']['bias'] + x['stats']['meaningfullness'])['_id']
+    return {'ru': max([i for i in cluster_obj if i['lang'] == 'ru'], key=lambda x: x['stats']['bias'] + x['stats']['meaningfullness'])['_id'],
+    'en': max([i for i in cluster_obj if i['lang'] == 'en'], key=lambda x: x['stats']['bias'] + x['stats']['meaningfullness'])['_id']}
 
 def range_sentiment(cluster_obj):
     ru = [i for i in cluster_obj if i['lang'] == 'ru']
